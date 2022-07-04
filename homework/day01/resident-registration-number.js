@@ -1,19 +1,23 @@
+import { checkType, checkLength, hideNumbers } from './registration.js'
+
 const customRegistrationNumber = (registerNum) => {
+    let isValid = true
+    let result = ""
     let number = []
     number[0] = registerNum.split("-")[0]
     number[1] = registerNum.split("-")[1]
 
-    if(registerNum.includes("-") === false) {
-        console.log("에러 발생!!! 형식이 올바르지 않습니다!!!")
-        return
-    }
-    if(number[0].length !== 6 || number[1].length !== 7) {
-        console.log("에러 발생!!! 개수를 제대로 입력해 주세요!!!")
+    isValid = checkType(registerNum)
+    if(isValid === false) {
         return
     }
 
-    number[1] = ((number[1].split('')).fill("*", 1)).join("")
-    const result = number.join("-")
+    isValid = checkLength(number)
+    if(isValid === false) {
+        return
+    }
+    
+    result = hideNumbers(number)
     console.log(result)
 }
 
