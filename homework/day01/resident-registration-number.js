@@ -12,7 +12,7 @@ const customRegistrationNumber = (registerNum) => {
         return
     }
 
-    number[1] = number[1].slice(0, 1) + "******"
+    number[1] = ((number[1].split('')).fill("*", 1)).join("")
     const result = number.join("-")
     console.log(result)
 }
