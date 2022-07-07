@@ -14,4 +14,21 @@ app.get('/users', (req, res) => {
   res.send(result)
 })
 
+app.get('/starbucks', (req, res) => {
+  const result = [
+    {name: "아메리카노", kcal: 10},
+    {name: "카페라떼", kcal: 150},
+    {name: "콜드브루", kcal: 10},
+    {name: "카페모카", kcal: 130},
+    {name: "돌체라떼", kcal: 170},
+    {name: "카라멜라떼", kcal: 215},
+    {name: "바닐라라떼", kcal: 227},
+    {name: "에스프레소", kcal: 5},
+    {name: "디카페인", kcal: 10},
+    {name: "오트라떼", kcal: 190}
+  ]
+
+  res.send(result)
+})
+
 app.listen(3000)
