@@ -1,6 +1,11 @@
 // const express = require('express')
 import express from 'express'
+import swaggerUi from 'swagger-ui-express'
+import swaggerJsdoc from 'swagger-jsdoc'
+import { options } from './swagger/config.js'
+
 const app = express()
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 
 app.get('/users', (req, res) => {
   const result = [
@@ -13,7 +18,7 @@ app.get('/users', (req, res) => {
 
   res.send(result)
 })
-
+ 
 app.get('/starbucks', (req, res) => {
   const result = [
     {name: "아메리카노", kcal: 10},
