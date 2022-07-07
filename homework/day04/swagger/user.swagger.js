@@ -1,9 +1,35 @@
 /**
- * @openapi
- * /:
+ * @swagger
+ * /Users:
  *   get:
- *     description: Welcome to swagger-jsdoc!
+ *     summary: 회원 리스트 가져오기
+ *     tags: [Users]
+ *     parameters:
+ *          - in: query
+ *            name: email
+ *            type: string
  *     responses:
  *       200:
- *         description: Returns a mysterious string.
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *              schema:
+ *                  type: array
+ *                  items:
+ *                      properties:
+ *                          email:
+ *                              type: string
+ *                              example: aaa@aaa.com
+ *                          name:
+ *                              type: string
+ *                              example: 철수
+ *                          phone:
+ *                              type: string
+ *                              example: 010-1234-5678
+ *                          personal:
+ *                              type: string
+ *                              example: 220110-2222222
+ *                          prefer:
+ *                              type: string
+ *                              example: https://naver.com
  */
