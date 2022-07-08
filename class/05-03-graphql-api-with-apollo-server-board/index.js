@@ -72,7 +72,7 @@ const resolvers = {   //04-02 index와 비교하며 하기
       //1단계 : 휴대폰번호 자릿수 맞는지 확인하기
       const isValid = checkValidationPhone(myPhone)
       if(isValid === false) {
-        return      //if(isValid === false) throw new Error("휴대폰 자릿수가 맞지 않습니다.") =>  이런 식으로 예외처리를 해줘야 한다.
+        return      //if(isValid === false) throw new Error("휴대폰 자릿수가 맞지 않습니다.") =>  이런 식으로 예외처리를 해줘야 한다. 현재 return은 값을 보내주는 역할이라 
       }
 
       //2단계 : 핸드폰 토큰 6자리 만들기
