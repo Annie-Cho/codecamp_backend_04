@@ -10,5 +10,20 @@
  *            type: string
  *     responses:
  *       200:
- *         description: Returns a mysterious string.
+ *         description: 성공
+ *         content:
+ *           application/json:
+ *              schema:
+ *                  type: array
+ *                  items:
+ *                      properties:
+ *                          email:
+ *                              type: string
+ *                              example: aaa@naver.com
+ *                          name:
+ *                              type: string
+ *                              example: 땃쥐
+ *                          phone:
+ *                              type: string
+ *                              example: 010-1234-5678
  */
