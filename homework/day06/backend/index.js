@@ -5,14 +5,13 @@ import swaggerJsdoc from 'swagger-jsdoc'
 import { options } from './swagger/config.js'
 import cors from 'cors'
 import { checkValidationPhone, getToken, sendTokenToSMS } from './phone.js'
-import bodyParser from 'body-parser'
 import { checkEmail, getWelcomeTemplate, sendEmail } from './email.js'
 
 const app = express()
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
 app.get('/users', (req, res) => {
   const result = [
