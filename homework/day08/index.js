@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
 app.post('/tokens/phone', async (req, res) => {
     let isValid = true
     let myToken = true
-    const phoneNum = req.body.phoneNum
+    const phoneNum = req.body.phone
 
     isValid = checkValidationPhone(phoneNum)
     if(isValid === false) {
@@ -40,14 +40,14 @@ app.post('/tokens/phone', async (req, res) => {
         await token.save()
     }
 
-    // sendTokenToSMS(phoneNum, myToken)        //테스트는 했는데 포인트가 없서효..ㅠㅠ 그래서 주석처리..ㅠㅠ
+    // sendTokenToSMS(phoneNum, myToken)        //테스트는 했는데 문자보낼 포인트가 없서효..ㅠㅠ 그래서 주석처리..ㅠㅠ
 
     res.send(`${phoneNum}으로 인증 문자(${myToken})가 전송되었습니다.`)
 })
 
 app.patch('/tokens/phone', async (req, res) => {
-    const phoneNum = req.body.phoneNum
-    const myToken = req.body.myToken
+    const phoneNum = req.body.phone
+    const myToken = req.body.token
 
     const result = await Token.findOne({phone: phoneNum, token: myToken})
     if(result) {
