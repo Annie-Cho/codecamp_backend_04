@@ -60,7 +60,7 @@ export const saveToken = async ({ phone, myToken }) => {
     }
 }
 
-export const getDataByPhone = async ({ phone, token }) => {
+export const checkTokenByPhone = async ({ phone, token }) => {
     let updated = {}
 
     const result = await Token.findOne({phone: phone})
@@ -74,6 +74,15 @@ export const getDataByPhone = async ({ phone, token }) => {
         }
     } else {
         console.log("[ERROR] 일치하는 사용자가 없습니다.")
+        return false
+    }
+}
+
+export const checkAuthByPhone = async ({ phone }) => {
+    const result = await Token.findOne({phone: phone})
+    if(result !== null) {
+        return result.isAuth === true
+    } else {
         return false
     }
 }

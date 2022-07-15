@@ -3,8 +3,9 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import { User } from './models/user.model.js'
 import { Coffee } from './models/starbucks.model.js'
+import { Token } from './models/token.model.js'
 import { generatePersonal, createPreferSiteData } from './personal.js'
-import { checkValidationPhone, createToken, saveToken, sendTokenToPhone, getDataByPhone } from './phone.js'
+import { checkValidationPhone, createToken, saveToken, sendTokenToPhone, checkTokenByPhone, checkAuthByPhone } from './phone.js'
 import { checkValidationEmail, sendEmail } from './email.js'
 
 const app = express()
@@ -40,11 +41,12 @@ app.post('/user', async (req, res) => {
     const phone = req.body.phone
     let og = {}
     
-    //Tokens만들고 만들 것
-    // const result = await User.findOne({phone: phone})
-    // if(result === null) {
-    //     //상태코드
-    // }
+    //인증 여부 확인
+    isValid = await checkAuthByPhone({ phone })
+    if(isValid === false) {
+        res.status(422).send("에러!! 핸드폰 번호가 인증되지 않았습니다")
+        return
+    }
 
     //주민등록번호 확인 및 뒷자리 가리기
     myPersonal = generatePersonal({ personal })
@@ -118,7 +120,7 @@ app.patch('/tokens/phone', async (req, res) => {
     const token = req.body.token
 
     //토큰 일치 확인 및 반영
-    const isValid = await getDataByPhone({ phone, token })
+    const isValid = await checkTokenByPhone({ phone, token })
 
     res.send(isValid)
 })
