@@ -2,8 +2,9 @@ import express, { json } from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import { User } from './models/user.model.js'
+import { Token } from './models/token.model.js'
 import { generatePersonal, createPreferSiteData } from './personal.js'
-import { checkValidationPhone } from './phone.js'
+import { checkValidationPhone, createToken, saveToken, sendTokenToPhone } from './phone.js'
 import { checkValidationEmail, sendEmail } from './email.js'
 
 const app = express()
@@ -21,7 +22,7 @@ app.get('/users', async (req, res) => {
     res.send(result)
 })
 
-app.post('/user', async (req, res) => {
+app.post('/user', (req, res) => {
     let myPersonal = ''
     let isValid = true
 
@@ -58,9 +59,9 @@ app.post('/user', async (req, res) => {
     }
 
     //prefer site 생성
-    og = await createPreferSiteData({ prefer })
+    og = createPreferSiteData({ prefer })
 
-    //DB에 저장
+    //DB-users에 저장
     const user = new User({
         name,
         email,
@@ -70,13 +71,40 @@ app.post('/user', async (req, res) => {
         phone,
         og
     })
-    await user.save()
+    user.save()
 
     //회원 가입 환영 메일
-    await sendEmail({name, email, phone, prefer})
+    sendEmail({name, email, phone, prefer})
 
     //클라이언트에 id 반환
     res.send(user.get('_id'))
+})
+
+app.post('/tokens/phone', (req, res) => {
+    let myToken = ''
+    let result = ''
+    let isValid = true
+    const phone = req.body.phone
+
+    //전화번호 유효성 확인
+    isValid = checkValidationPhone({ phone })
+    if(isValid === false) {
+        return
+    }
+
+    //토큰 생성
+    myToken = createToken()
+    if(myToken === false) {
+        return
+    }
+
+    //토큰 전송
+    // sendTokenToPhone({ phone, myToken })     //제출 시 주석 풀기
+
+    //DB-tokens에 저장
+    saveToken({ phone, myToken })
+
+    res.send("핸드폰으로 인증 문자가 전송되었습니다!")
 })
 
 mongoose.connect("mongodb://my-database:27017/myData")
