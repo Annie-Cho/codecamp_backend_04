@@ -1,5 +1,6 @@
 import express, { json } from 'express'
 import mongoose from 'mongoose'
+import cors from 'cors'
 import { User } from './models/user.model.js'
 import { generatePersonal, createPreferSiteData } from './personal.js'
 import { checkValidationPhone } from './phone.js'
@@ -7,10 +8,17 @@ import { checkValidationEmail, sendEmail } from './email.js'
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 
 app.get('/', function (req, res) {
   res.send('Hello World')
+})
+
+app.get('/users', async (req, res) => {
+    const result = await User.find();
+
+    res.send(result)
 })
 
 app.post('/user', async (req, res) => {
