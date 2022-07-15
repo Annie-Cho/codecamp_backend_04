@@ -4,7 +4,7 @@ import cors from 'cors'
 import { User } from './models/user.model.js'
 import { Token } from './models/token.model.js'
 import { generatePersonal, createPreferSiteData } from './personal.js'
-import { checkValidationPhone, createToken, saveToken, sendTokenToPhone } from './phone.js'
+import { checkValidationPhone, createToken, saveToken, sendTokenToPhone, getDataByPhone } from './phone.js'
 import { checkValidationEmail, sendEmail } from './email.js'
 
 const app = express()
@@ -105,6 +105,16 @@ app.post('/tokens/phone', (req, res) => {
     saveToken({ phone, myToken })
 
     res.send("핸드폰으로 인증 문자가 전송되었습니다!")
+})
+
+app.patch('/tokens/phone', async (req, res) => {
+    const phone = req.body.phone
+    const token = req.body.token
+
+    //토큰 일치 확인 및 반영
+    const isValid = await getDataByPhone({ phone, token })
+
+    res.send(isValid)
 })
 
 mongoose.connect("mongodb://my-database:27017/myData")
