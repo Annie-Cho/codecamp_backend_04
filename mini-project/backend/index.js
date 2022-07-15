@@ -2,7 +2,7 @@ import express, { json } from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import { User } from './models/user.model.js'
-import { Token } from './models/token.model.js'
+import { Coffee } from './models/starbucks.model.js'
 import { generatePersonal, createPreferSiteData } from './personal.js'
 import { checkValidationPhone, createToken, saveToken, sendTokenToPhone, getDataByPhone } from './phone.js'
 import { checkValidationEmail, sendEmail } from './email.js'
@@ -17,7 +17,13 @@ app.get('/', function (req, res) {
 })
 
 app.get('/users', async (req, res) => {
-    const result = await User.find();
+    const result = await User.find()
+
+    res.send(result)
+})
+
+app.get('/starbucks', async (req, res) => {
+    const result = await Coffee.find()
 
     res.send(result)
 })
