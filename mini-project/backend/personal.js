@@ -2,7 +2,6 @@ import axios from 'axios'
 import cheerio from 'cheerio'
 
 export const generatePersonal = ({ personal }) => {
-    let isValid = true
     let result = ''
     
     //자릿수 확인 및 하이픈 확인

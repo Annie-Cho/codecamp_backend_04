@@ -22,7 +22,7 @@ app.get('/users', async (req, res) => {
     res.send(result)
 })
 
-app.post('/user', (req, res) => {
+app.post('/user', async (req, res) => {
     let myPersonal = ''
     let isValid = true
 
@@ -59,7 +59,7 @@ app.post('/user', (req, res) => {
     }
 
     //prefer site 생성
-    og = createPreferSiteData({ prefer })
+    og = await createPreferSiteData({ prefer })
 
     //DB-users에 저장
     const user = new User({
@@ -71,16 +71,16 @@ app.post('/user', (req, res) => {
         phone,
         og
     })
-    user.save()
+    await user.save()
 
     //회원 가입 환영 메일
-    sendEmail({name, email, phone, prefer})
+    await sendEmail({name, email, phone, prefer})
 
     //클라이언트에 id 반환
     res.send(user.get('_id'))
 })
 
-app.post('/tokens/phone', (req, res) => {
+app.post('/tokens/phone', async (req, res) => {
     let myToken = ''
     let result = ''
     let isValid = true
@@ -99,10 +99,10 @@ app.post('/tokens/phone', (req, res) => {
     }
 
     //토큰 전송
-    // sendTokenToPhone({ phone, myToken })     //제출 시 주석 풀기
+    // await sendTokenToPhone({ phone, myToken })     //제출 시 주석 풀기
 
     //DB-tokens에 저장
-    saveToken({ phone, myToken })
+    await saveToken({ phone, myToken })
 
     res.send("핸드폰으로 인증 문자가 전송되었습니다!")
 })
