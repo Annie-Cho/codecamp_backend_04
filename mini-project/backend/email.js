@@ -3,7 +3,7 @@ import 'dotenv/config'
 import { getToday } from "./utils.js"
 
 export const checkValidationEmail = ({ email }) => {
-    if(email === '' || email === undefined || !email.includes('@')) {
+    if(email === '' || email === undefined || email.includes('@') === false) {
         console.log("[ERROR] 이메일을 확인해주세요.")
         return false
     } else {
