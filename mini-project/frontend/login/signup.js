@@ -20,7 +20,14 @@ const submitToken = async () => {
 // 회원 가입 API 요청
 const submitSignup = async () => {
   const userInfo = getUserInfo()
-  const result = await axios.post('http://localhost:3000/user', {...userInfo})
-
-  console.log('회원 가입 완료')
+  await axios.post('http://localhost:3000/user', {...userInfo})
+    .then(function (res) {
+      console.log("회원 가입 완료")
+      console.log(`id = ${res.data}`)
+    })
+    .catch(function (error) {
+      if(error.response) {
+        console.log("회원 가입 불가 - 핸드폰 번호가 인증되지 않았습니다")
+      }
+    })
 }
