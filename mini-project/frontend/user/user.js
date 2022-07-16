@@ -2,7 +2,9 @@
 const getUser = async () => {
   // 받은 데이터로 createUserDiv함수를 이용해
   // 목록 화면을 완성해주세요.
-  createUserDiv()
+
+  const result = await axios.get('http://localhost:3000/users')
+  result.data.map(ele => createUserDiv(ele))
 }
 
 const createUserDiv = (data) => {
