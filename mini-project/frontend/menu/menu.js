@@ -2,7 +2,9 @@
 const getCoffee = async () => {
   // 받은 데이터로 createMenuCard 함수를 이용해
   // 메뉴 카드를 만들어주세요.
-  createMenuCard()
+  const result = await axios.get('http://localhost:3000/starbucks')
+
+  result.data.map((ele) => createMenuCard(ele))
 }
 
 const createMenuCard = (data) => {
