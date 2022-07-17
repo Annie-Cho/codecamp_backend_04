@@ -10,6 +10,8 @@ services:
       - ./personal.js:/myfolder/personal.js
       - ./phone.js:/myfolder/phone.js
       - ./email.js:/myfolder/email.js
+      - ./swagger/token.swagger.js:/myfolder/swagger/token.swagger.js
+      - ./swagger/user.swagger.js:/myfolder/swagger/user.swagger.js
     ports:
       - 3000:3000
 

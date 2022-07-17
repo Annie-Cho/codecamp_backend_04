@@ -1,6 +1,9 @@
 import express, { json } from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import swaggerUi from 'swagger-ui-express'
+import swaggerJsdoc from 'swagger-jsdoc'
+import { options } from './swagger/config.js'
 import { User } from './models/user.model.js'
 import { Coffee } from './models/starbucks.model.js'
 import { Token } from './models/token.model.js'
@@ -9,6 +12,7 @@ import { checkValidationPhone, createToken, saveToken, sendTokenToPhone, checkTo
 import { checkValidationEmail, sendEmail } from './email.js'
 
 const app = express()
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 
 app.use(cors())
 app.use(express.json())
