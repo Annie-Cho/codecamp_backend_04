@@ -1,9 +1,9 @@
 export const getToday = () => {
-    let today = new Date()
+    const today = new Date()
 
-    let yyyy = today.getFullYear()
-    let mm = String(today.getMonth()).padStart(2, '0')
-    let dd = String(today.getDate()).padStart(2, '0')
+    const yyyy = today.getFullYear()
+    const mm = String(today.getMonth()+1).padStart(2, '0')
+    const dd = String(today.getDate()).padStart(2, '0')
 
     return `${yyyy}-${mm}-${dd}`
 }
