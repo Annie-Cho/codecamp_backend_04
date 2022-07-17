@@ -6,7 +6,7 @@
  *     tags: [token-controller]
  *     requestBody:
  *       required: true
- *       description: 핸드폰 번호 입력
+ *       description: 입력된 핸드폰 번호로 인증번호를 전송합니다.
  *       content:
  *         application/json:
  *           schema:
@@ -27,7 +27,7 @@
  *     tags: [token-controller]
  *     requestBody:
  *       required: true
- *       description: 핸드폰 번호 입력
+ *       description: 입력된 핸드폰 번호를 통해 입력받은 인증번호의 일치 여부를 확인합니다.
  *       content:
  *         application/json:
  *           schema:
