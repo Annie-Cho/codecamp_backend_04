@@ -49,7 +49,7 @@
  *     tags: [user-controller]
  *     requestBody:
  *       required: true
- *       description: 회원 정보 입력
+ *       description: 입력된 회원 정보를 취합하여 데이터베이스에 저장합니다.(단, 인증완료된 회원만 저장 가능)
  *       content:
  *         application/json:
  *           schema:
