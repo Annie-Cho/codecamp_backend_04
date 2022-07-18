@@ -57,16 +57,22 @@
  *             properties:
  *               name:
  *                  type: string
+ *                  example: '조혜인'
  *               email:
  *                  type: string
+ *                  example: 'ani100482@gmail.com'
  *               personal:
  *                  type: string
+ *                  example: '220717-2222222'
  *               prefer:
  *                  type: string
+ *                  example: 'https://www.naver.com'
  *               pwd:
  *                  type: string
+ *                  example: '1234'
  *               phone:
  *                  type: string
+ *                  example: '01037893571'
  *     responses:
  *       200:
  *         description: 성공

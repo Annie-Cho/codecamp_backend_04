@@ -14,6 +14,7 @@
  *             properties:
  *               phone:
  *                  type: string
+ *                  example: '01037893571'
  *     responses:
  *       200:
  *         description: 성공
@@ -35,8 +36,10 @@
  *             properties:
  *               phone:
  *                  type: string
+ *                  example: '01037893571'
  *               token:
  *                  type: string
+ *                  example: '123456'
  *     responses:
  *       200:
  *         description: 성공
