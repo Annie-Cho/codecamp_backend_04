@@ -4,12 +4,8 @@ import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc from 'swagger-jsdoc'
 import { options } from './swagger/config.js'
-import { User } from './models/user.model.js'
 import { Coffee } from './models/starbucks.model.js'
-import { Token } from './models/token.model.js'
-import { generatePersonal, createPreferSiteData } from './personal.js'
 import { checkValidationPhone, createToken, saveToken, sendTokenToPhone, checkTokenByPhone, checkAuthByPhone } from './phone.js'
-import { checkValidationEmail, sendEmail } from './email.js'
 import { UserController } from './controllers/user.controller.js'
 
 const app = express()
@@ -17,10 +13,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(options)));
 
 app.use(cors())
 app.use(express.json())
-
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
 
 const userController = new UserController()
 app.get('/users', userController.fetchUsers)
