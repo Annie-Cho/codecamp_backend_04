@@ -53,4 +53,22 @@ export class TokenService {
       await token.save();
     }
   };
+
+  checkTokenByPhone = async ({ phone, token }) => {
+    let updated = {};
+
+    const result = await Token.findOne({ phone: phone });
+    if (result !== null) {
+      if (token === result.token) {
+        updated = await Token.updateOne({ phone: phone }, { isAuth: true });
+        return updated !== null;
+      } else {
+        console.log("[ERROR] 인증번호가 일치하지 않습니다.");
+        return false;
+      }
+    } else {
+      console.log("[ERROR] 일치하는 사용자가 없습니다.");
+      return false;
+    }
+  };
 }

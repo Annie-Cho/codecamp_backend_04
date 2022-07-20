@@ -35,15 +35,7 @@ app.post("/user", userController.createUser);
 
 app.post("/tokens/phone", tokenController.sendToken);
 
-app.patch("/tokens/phone", async (req, res) => {
-  const phone = req.body.phone;
-  const token = req.body.token;
-
-  //토큰 일치 확인 및 반영
-  const isValid = await checkTokenByPhone({ phone, token });
-
-  res.send(isValid);
-});
+app.patch("/tokens/phone", tokenController.checkToken);
 
 mongoose.connect("mongodb://my-database:27017/myData");
 
