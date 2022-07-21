@@ -1,9 +1,10 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query } from '@nestjs/graphql';
 import { Starbucks } from '../entities/starbucks.entity';
 import { StarbucksService } from './starbucks.service';
 import { CreateStarbucksInput } from '../dto/createStarbucks.input';
+import { Controller } from '@nestjs/common';
 
-@Resolver()
+@Controller()
 export class StarbucksResolver {
   constructor(private readonly starbucksService: StarbucksService) {}
 
