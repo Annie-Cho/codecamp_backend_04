@@ -1,8 +1,8 @@
 import { Controller } from '@nestjs/common';
 import { Mutation, Query, Args } from '@nestjs/graphql';
-import { Starbucks } from '../entities/starbucks.entity';
+import { Starbucks } from './entities/starbucks.entity';
 import { StarbucksService } from './starbucks.service';
-import { CreateStarbucksInput } from '../dto/createStarbucks.input';
+import { CreateStarbucksInput } from './dto/createStarbucks.input';
 
 @Controller()
 export class StarbucksResolver {
