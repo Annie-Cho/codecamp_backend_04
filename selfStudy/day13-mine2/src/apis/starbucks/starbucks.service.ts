@@ -18,4 +18,9 @@ export class StarbucksService {
 
     return result;
   }
+
+  create({ createStarbucksInput }) {
+    console.log(createStarbucksInput);
+    return '등록에 성공하였습니다.';
+  }
 }
