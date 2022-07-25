@@ -1,5 +1,5 @@
-import { Controller } from '@nestjs/common';
-import { Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { NewStarbucks } from '../dto/newStarbucks.input';
 import { Starbucks } from '../entities/starbucks.entity';
 import { StarbucksService } from './starbucks.service';
 
@@ -10,5 +10,10 @@ export class StarbucksResolver {
   @Query(() => [Starbucks])
   fetchStarbucks() {
     return this.starbucksService.findAll();
+  }
+
+  @Mutation(() => String)
+  createStarbucks(@Args('newStarbucks') newStarbucks: NewStarbucks) {
+    return this.starbucksService.create(newStarbucks);
   }
 }

@@ -1,11 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { NewStarbucks } from '../dto/newStarbucks.input';
 
 @Injectable()
 export class StarbucksService {
-  // getHello(): string {
-  //   return 'Hello World!';
-  // }
-
   findAll() {
     const result = [
       {
@@ -31,5 +28,10 @@ export class StarbucksService {
     ];
 
     return result;
+  }
+
+  create(newStarbucks: NewStarbucks) {
+    console.log(newStarbucks);
+    return '등록에 성공하였습니다.';
   }
 }

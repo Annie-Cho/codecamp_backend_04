@@ -16,3 +16,18 @@ type Starbucks {
 type Query {
   fetchStarbucks: [Starbucks!]!
 }
+
+type Mutation {
+  createStarbucks(newStarbucks: NewStarbucks!): String!
+}
+
+input NewStarbucks {
+  menu: String!
+  price: Int!
+  kcal: Int!
+  saturated_fat: Int!
+  protein: Int!
+  salt: Int!
+  sugar: Int!
+  caffeine: Int!
+}
