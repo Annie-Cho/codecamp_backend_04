@@ -32,6 +32,10 @@ export class Food {
   @Field(() => Int)
   kcal: number;
 
+  @Column({ default: false })
+  @Field(() => Boolean)
+  isSoldout: boolean;
+
   @ManyToOne(() => SubCategory)
   @Field(() => SubCategory)
   subCategory: SubCategory;

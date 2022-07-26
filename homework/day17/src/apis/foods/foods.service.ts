@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Food } from './entities/food.entity';
@@ -23,13 +23,25 @@ export class FoodService {
   }
 
   async update({ foodId, updateFoodInput }) {
-    const myFood = await this.foodRepository.findOne({ where: { id: foodId } });
+    const myFood = await this.foodRepository.findOne({
+      where: { id: foodId },
+    });
+
     const result = this.foodRepository.save({
       ...myFood,
       id: foodId,
       ...updateFoodInput,
     });
-
     return result;
+  }
+
+  async checkSoldout({ foodId }) {
+    const food = await this.foodRepository.findOne({
+      where: { id: foodId },
+    });
+
+    if (food.isSoldout) {
+      throw new UnprocessableEntityException('현재 품절된 상품입니다.');
+    }
   }
 }

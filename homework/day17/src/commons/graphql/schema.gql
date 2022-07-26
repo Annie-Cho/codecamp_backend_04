@@ -55,6 +55,7 @@ type Food {
   price: Int!
   desc: String!
   kcal: Int!
+  isSoldout: Boolean!
   subCategory: SubCategory!
   orders: [Order!]!
 }
