@@ -1,12 +1,12 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Product } from './entities/product.entity';
-import { ProductService } from './product.service';
+import { ProductsService } from './products.service';
 import { CreateProductInput } from './dto/createProduct.input';
 import { UpdateProductInput } from './dto/updateProduct.input';
 
 @Resolver()
-export class ProductResolver {
-  constructor(private readonly productService: ProductService) {}
+export class ProductsResolver {
+  constructor(private readonly productService: ProductsService) {}
 
   @Query(() => [Product])
   fetchProducts() {
@@ -37,5 +37,12 @@ export class ProductResolver {
 
     //수정하기
     return this.productService.update({ productId, updateProductInput });
+  }
+
+  @Mutation(() => Boolean)
+  deleteProduct(
+    @Args('productId') productId: string, //
+  ) {
+    return this.productService.delete({ productId });
   }
 }

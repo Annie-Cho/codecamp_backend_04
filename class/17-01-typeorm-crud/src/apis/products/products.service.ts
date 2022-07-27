@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 
 @Injectable() //의존성 주입할 때 싱글톤이니 아니니.. 싱글톤은 디폴트였음. 여기서 옵션으로 싱글톤 아니게 만들 수 있음. {scope}?
-export class ProductService {
+export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
