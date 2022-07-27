@@ -80,6 +80,7 @@ type Query {
   fetchUser(userId: String!): User!
   fetchImages: [Image!]!
   fetchImagesWithDeleted: [Image!]!
+  fetchSubCategories: [SubCategory!]!
 }
 
 type Mutation {
@@ -92,6 +93,7 @@ type Mutation {
   createImage(createImageInput: CreateImageInput!): Image!
   updateImage(imageId: String!, updateImageInput: UpdateImageInput!): Image!
   deleteImage(imageId: String!): Boolean!
+  createSubCategory(createSubCategory: CreateSubCategory!): SubCategory!
 }
 
 input CreateFoodInput {
@@ -99,6 +101,7 @@ input CreateFoodInput {
   price: Int!
   desc: String!
   kcal: Int!
+  subCategoryId: String!
 }
 
 input UpdateFoodInput {
@@ -106,6 +109,7 @@ input UpdateFoodInput {
   price: Int
   desc: String
   kcal: Int
+  subCategoryId: String
 }
 
 input CreateUserInput {
@@ -132,4 +136,8 @@ input CreateImageInput {
 input UpdateImageInput {
   url: String!
   isMain: Boolean!
+}
+
+input CreateSubCategory {
+  name: String!
 }

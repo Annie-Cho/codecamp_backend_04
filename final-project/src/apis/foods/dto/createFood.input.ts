@@ -16,4 +16,8 @@ export class CreateFoodInput {
   @Min(0)
   @Field(() => Int)
   kcal: number;
+
+  //ManyToOne
+  @Field(() => String)
+  subCategoryId: string;
 }

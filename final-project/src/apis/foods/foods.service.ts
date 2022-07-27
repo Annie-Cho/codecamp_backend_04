@@ -11,21 +11,32 @@ export class FoodsService {
   ) {}
 
   findAll() {
-    return this.foodRepository.find();
+    return this.foodRepository.find({
+      relations: ['subCategory'],
+    });
   }
 
-  async findAllWithDeleted() {
-    const result = this.foodRepository.find({ withDeleted: true });
-    console.log(result);
-    return result;
+  findAllWithDeleted() {
+    return this.foodRepository.find({
+      withDeleted: true,
+      relations: ['subCategory'],
+    });
   }
 
   findOne({ foodId }) {
-    return this.foodRepository.findOne({ where: { id: foodId } });
+    return this.foodRepository.findOne({
+      where: { id: foodId },
+      relations: ['subCategory'],
+    });
   }
 
   create({ createFoodInput }) {
-    return this.foodRepository.save({ ...createFoodInput });
+    const { subCategoryId, ...food } = createFoodInput;
+
+    return this.foodRepository.save({
+      ...food,
+      subCategory: { id: subCategoryId },
+    });
   }
 
   async update({ foodId, updateFoodInput }) {

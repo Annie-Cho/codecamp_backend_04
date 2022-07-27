@@ -6,12 +6,14 @@ import { FoodsModule } from './apis/foods/foods.module';
 import 'dotenv/config';
 import { UsersModule } from './apis/users/users.module';
 import { ImagesModule } from './apis/images/images.module';
+import { SubCategoriesModule } from './apis/subCategories/subCategories.module';
 
 @Module({
   imports: [
     FoodsModule,
     UsersModule,
     ImagesModule,
+    SubCategoriesModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/commons/graphql/schema.gql',
