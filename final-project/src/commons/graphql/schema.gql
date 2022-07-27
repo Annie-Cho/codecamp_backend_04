@@ -68,11 +68,15 @@ type Nutri {
 type Query {
   fetchFoods: [Food!]!
   fetchFood(foodId: String!): Food!
+  fetchUsers: [User!]!
+  fetchUser(userId: String!): User!
 }
 
 type Mutation {
   createFood(createFoodInput: CreateFoodInput!): Food!
   updateFood(foodId: String!, updateFoodInput: UpdateFoodInput!): Food!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(userId: String!, updateUserInput: UpdateUserInput!): User!
 }
 
 input CreateFoodInput {
@@ -87,4 +91,19 @@ input UpdateFoodInput {
   price: Int
   desc: String
   kcal: Int
+}
+
+input CreateUserInput {
+  id: String!
+  name: String!
+  pwd: String!
+  address: String!
+  email: String!
+}
+
+input UpdateUserInput {
+  name: String
+  pwd: String
+  address: String
+  email: String
 }
