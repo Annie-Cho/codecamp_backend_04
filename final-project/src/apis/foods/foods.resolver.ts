@@ -30,7 +30,7 @@ export class FoodResolver {
     @Args('foodId') foodId: string,
     @Args('updateFoodInput') updateFoodInput: UpdateFoodInput, //
   ) {
-    await this.foodService.checkSoldout({ foodId });
+    // await this.foodService.checkSoldout({ foodId });
 
     return this.foodService.update({ foodId, updateFoodInput });
   }
