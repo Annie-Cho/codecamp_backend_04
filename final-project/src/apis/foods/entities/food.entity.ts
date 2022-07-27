@@ -3,6 +3,7 @@ import { Order } from 'src/apis/orders/entities/order.entity';
 import { SubCategory } from 'src/apis/subCategories/entities/subCategory.entity';
 import {
   Column,
+  DeleteDateColumn,
   Entity,
   ManyToMany,
   ManyToOne,
@@ -35,6 +36,9 @@ export class Food {
   @Column({ default: false })
   @Field(() => Boolean)
   isSoldout: boolean;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   @ManyToOne(() => SubCategory)
   @Field(() => SubCategory)

@@ -67,6 +67,7 @@ type Nutri {
 
 type Query {
   fetchFoods: [Food!]!
+  fetchFoodsWithDeleted: [Food!]!
   fetchFood(foodId: String!): Food!
   fetchUsers: [User!]!
   fetchUser(userId: String!): User!
@@ -75,6 +76,8 @@ type Query {
 type Mutation {
   createFood(createFoodInput: CreateFoodInput!): Food!
   updateFood(foodId: String!, updateFoodInput: UpdateFoodInput!): Food!
+  deleteFood(foodId: String!): Boolean!
+  restoreFood(foodId: String!): Boolean!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(userId: String!, updateUserInput: UpdateUserInput!): User!
 }

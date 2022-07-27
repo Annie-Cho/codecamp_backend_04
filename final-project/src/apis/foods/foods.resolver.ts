@@ -13,6 +13,11 @@ export class FoodsResolver {
     return this.foodsService.findAll();
   }
 
+  @Query(() => [Food])
+  fetchFoodsWithDeleted() {
+    return this.foodsService.findAllWithDeleted();
+  }
+
   @Query(() => Food)
   fetchFood(@Args('foodId') foodId: string) {
     return this.foodsService.findOne({ foodId });
@@ -33,5 +38,15 @@ export class FoodsResolver {
     // await this.foodService.checkSoldout({ foodId });
 
     return this.foodsService.update({ foodId, updateFoodInput });
+  }
+
+  @Mutation(() => Boolean)
+  deleteFood(@Args('foodId') foodId: string) {
+    return this.foodsService.delete({ foodId });
+  }
+
+  @Mutation(() => Boolean)
+  restoreFood(@Args('foodId') foodId: string) {
+    return this.foodsService.restore({ foodId });
   }
 }

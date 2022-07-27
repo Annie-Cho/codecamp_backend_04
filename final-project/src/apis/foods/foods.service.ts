@@ -14,6 +14,10 @@ export class FoodsService {
     return this.foodRepository.find();
   }
 
+  findAllWithDeleted() {
+    return this.foodRepository.find({ withDeleted: true });
+  }
+
   findOne({ foodId }) {
     return this.foodRepository.findOne({ where: { id: foodId } });
   }
@@ -43,5 +47,15 @@ export class FoodsService {
     if (food.isSoldout) {
       throw new UnprocessableEntityException('현재 품절된 상품입니다.');
     }
+  }
+
+  async delete({ foodId }) {
+    const result = await this.foodRepository.softDelete({ id: foodId });
+    return result.affected;
+  }
+
+  async restore({ foodId }) {
+    const result = await this.foodRepository.restore({ id: foodId });
+    return result.affected;
   }
 }
