@@ -1,0 +1,90 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserGrade {
+  id: String!
+  name: String!
+  coupons: [Coupon!]!
+}
+
+type Coupon {
+  id: String!
+  desc: String!
+  userGrades: [UserGrade!]!
+}
+
+type User {
+  id: String!
+  name: String!
+  pwd: String!
+  address: String!
+  email: String!
+  userGrade: UserGrade!
+}
+
+type Order {
+  id: String!
+  date: DateTime!
+  price: Int!
+  status: String!
+  user: User!
+  coupon: Coupon!
+  foods: [Food!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type MainCategory {
+  id: String!
+  name: String!
+}
+
+type SubCategory {
+  id: String!
+  name: String!
+  mainId: MainCategory!
+}
+
+type Food {
+  id: String!
+  name: String!
+  price: Int!
+  desc: String!
+  kcal: Int!
+  isSoldout: Boolean!
+  subCategory: SubCategory!
+  orders: [Order!]!
+}
+
+type Nutri {
+  id: String!
+  name: String!
+}
+
+type Query {
+  fetchFoods: [Food!]!
+  fetchFood(foodId: String!): Food!
+}
+
+type Mutation {
+  createFood(createFoodInput: CreateFoodInput!): Food!
+  updateFood(foodId: String!, updateFoodInput: UpdateFoodInput!): Food!
+}
+
+input CreateFoodInput {
+  name: String!
+  price: Int!
+  desc: String!
+  kcal: Int!
+}
+
+input UpdateFoodInput {
+  name: String
+  price: Int
+  desc: String
+  kcal: Int
+}
