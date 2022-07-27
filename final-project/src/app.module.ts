@@ -5,11 +5,13 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { FoodsModule } from './apis/foods/foods.module';
 import 'dotenv/config';
 import { UsersModule } from './apis/users/users.module';
+import { ImagesModule } from './apis/images/images.module';
 
 @Module({
   imports: [
     FoodsModule,
     UsersModule,
+    ImagesModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/commons/graphql/schema.gql',

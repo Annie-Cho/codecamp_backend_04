@@ -14,8 +14,10 @@ export class FoodsService {
     return this.foodRepository.find();
   }
 
-  findAllWithDeleted() {
-    return this.foodRepository.find({ withDeleted: true });
+  async findAllWithDeleted() {
+    const result = this.foodRepository.find({ withDeleted: true });
+    console.log(result);
+    return result;
   }
 
   findOne({ foodId }) {

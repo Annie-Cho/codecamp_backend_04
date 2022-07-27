@@ -60,6 +60,13 @@ type Food {
   orders: [Order!]!
 }
 
+type Image {
+  id: String!
+  url: String!
+  isMain: Boolean!
+  food: Food!
+}
+
 type Nutri {
   id: String!
   name: String!
@@ -71,6 +78,8 @@ type Query {
   fetchFood(foodId: String!): Food!
   fetchUsers: [User!]!
   fetchUser(userId: String!): User!
+  fetchImages: [Image!]!
+  fetchImagesWithDeleted: [Image!]!
 }
 
 type Mutation {
@@ -80,6 +89,9 @@ type Mutation {
   restoreFood(foodId: String!): Boolean!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(userId: String!, updateUserInput: UpdateUserInput!): User!
+  createImage(createImageInput: CreateImageInput!): Image!
+  updateImage(imageId: String!, updateImageInput: UpdateImageInput!): Image!
+  deleteImage(imageId: String!): Boolean!
 }
 
 input CreateFoodInput {
@@ -109,4 +121,15 @@ input UpdateUserInput {
   pwd: String
   address: String
   email: String
+}
+
+input CreateImageInput {
+  url: String!
+  isMain: Boolean!
+  foodId: String!
+}
+
+input UpdateImageInput {
+  url: String!
+  isMain: Boolean!
 }
