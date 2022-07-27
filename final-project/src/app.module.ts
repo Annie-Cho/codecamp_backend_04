@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { FoodModule } from './apis/foods/foods.module';
+import { FoodsModule } from './apis/foods/foods.module';
 import 'dotenv/config';
-import { UserModule } from './apis/users/users.module';
+import { UsersModule } from './apis/users/users.module';
 
 @Module({
   imports: [
-    FoodModule,
-    UserModule,
+    FoodsModule,
+    UsersModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/commons/graphql/schema.gql',

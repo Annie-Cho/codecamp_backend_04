@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { Food } from './entities/food.entity';
-import { FoodResolver } from './foods.resolver';
-import { FoodService } from './foods.service';
+import { FoodsResolver } from './foods.resolver';
+import { FoodsService } from './foods.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -10,6 +10,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       Food, //
     ]),
   ],
-  providers: [FoodResolver, FoodService],
+  providers: [FoodsResolver, FoodsService],
 })
-export class FoodModule {}
+export class FoodsModule {}

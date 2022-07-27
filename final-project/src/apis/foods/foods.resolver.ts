@@ -2,27 +2,27 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateFoodInput } from './dto/createFood.input';
 import { UpdateFoodInput } from './dto/updateFood.input';
 import { Food } from './entities/food.entity';
-import { FoodService } from './foods.service';
+import { FoodsService } from './foods.service';
 
 @Resolver()
-export class FoodResolver {
-  constructor(private readonly foodService: FoodService) {}
+export class FoodsResolver {
+  constructor(private readonly foodsService: FoodsService) {}
 
   @Query(() => [Food])
   fetchFoods() {
-    return this.foodService.findAll();
+    return this.foodsService.findAll();
   }
 
   @Query(() => Food)
   fetchFood(@Args('foodId') foodId: string) {
-    return this.foodService.findOne({ foodId });
+    return this.foodsService.findOne({ foodId });
   }
 
   @Mutation(() => Food)
   createFood(
     @Args('createFoodInput') createFoodInput: CreateFoodInput, //
   ) {
-    return this.foodService.create({ createFoodInput });
+    return this.foodsService.create({ createFoodInput });
   }
 
   @Mutation(() => Food)
@@ -32,6 +32,6 @@ export class FoodResolver {
   ) {
     // await this.foodService.checkSoldout({ foodId });
 
-    return this.foodService.update({ foodId, updateFoodInput });
+    return this.foodsService.update({ foodId, updateFoodInput });
   }
 }
