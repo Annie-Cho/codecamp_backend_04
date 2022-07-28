@@ -16,11 +16,11 @@ import {
 @Entity()
 @ObjectType()
 export class Order {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field(() => String)
   id: string;
 
-  @Column({ type: 'char', length: 10 })
+  @Column({ type: 'varchar', length: 100 })
   @Field(() => Date)
   date: Date;
 
@@ -28,7 +28,7 @@ export class Order {
   @Field(() => Int)
   price: number;
 
-  @Column({ type: 'varchar', length: 5 })
+  @Column({ type: 'varchar', length: 5, default: '상품준비중' })
   @Field(() => String)
   status: string;
 

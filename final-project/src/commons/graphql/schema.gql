@@ -17,7 +17,6 @@ type Coupon {
 type User {
   id: String!
   name: String!
-  pwd: String!
   address: String!
   email: String!
   userGrade: UserGrade!
@@ -83,6 +82,8 @@ type Query {
   fetchSubCategories: [SubCategory!]!
   fetchMainCategories: [MainCategory!]!
   fetchMainCategoriesWithDeleted: [MainCategory!]!
+  fetchNutries: [Nutri!]!
+  fetchOrders: [Order!]!
 }
 
 type Mutation {
@@ -92,6 +93,8 @@ type Mutation {
   restoreFood(foodId: String!): Boolean!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(userId: String!, updateUserInput: UpdateUserInput!): User!
+  deleteUser(userId: String!): Boolean!
+  restoreUser(userId: String!): Boolean!
   createImage(createImageInput: CreateImageInput!): Image!
   updateImage(imageId: String!, updateImageInput: UpdateImageInput!): Image!
   deleteImage(imageId: String!): Boolean!
@@ -103,6 +106,8 @@ type Mutation {
   updateMainCategory(mainCategoryId: String!, updateMainCategoryInput: UpdateMainCategoryInput!): MainCategory!
   deleteMainCategory(mainCategoryId: String!): Boolean!
   restoreMainCategory(mainCategoryId: String!): Boolean!
+  createNutri(nutriName: String!): Nutri!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
 }
 
 input CreateFoodInput {
@@ -163,4 +168,9 @@ input CreateMainCategoryInput {
 
 input UpdateMainCategoryInput {
   name: String
+}
+
+input CreateOrderInput {
+  price: Int!
+  foodIds: [String!]!
 }

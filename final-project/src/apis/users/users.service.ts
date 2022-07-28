@@ -1,4 +1,9 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
@@ -25,7 +30,11 @@ export class UsersService {
   async checkIsAvailable({ userId }) {
     const user = await this.userRepository.findOne({ where: { id: userId } });
     if (user) {
-      throw new UnprocessableEntityException('이미 사용중인 아이디입니다.');
+      // throw new UnprocessableEntityException('이미 사용중인 아이디입니다.');
+      throw new HttpException(
+        '이미 사용 중인 아이디입니다.',
+        HttpStatus.CONFLICT,
+      );
     }
   }
 
@@ -37,5 +46,16 @@ export class UsersService {
       id: userId,
       ...updateUserInput,
     });
+  }
+
+  async delete({ userId }) {
+    console.log(userId);
+    const result = await this.userRepository.softDelete({ id: userId });
+    return result.affected;
+  }
+
+  async restore({ userId }) {
+    const result = await this.userRepository.restore({ id: userId });
+    return result.affected;
   }
 }

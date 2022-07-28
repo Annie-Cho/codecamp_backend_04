@@ -39,20 +39,21 @@ export class SubCategoriesService {
   }
 
   async delete({ subCategoryId }) {
-    const checkFoods = this.foodRepository.find({
+    const checkFoods = await this.foodRepository.findOne({
       where: { subCategory: subCategoryId },
     });
-    if (checkFoods !== null) {
+    console.log(checkFoods);
+    if (checkFoods) {
       throw new HttpException(
         '해당 카테고리에 상품이 담겨있으므로 삭제할 수 없습니다.',
-        HttpStatus.UNPROCESSABLE_ENTITY,
+        HttpStatus.CONFLICT,
       );
+    } else {
+      const result = await this.subCategoryRepository.softDelete({
+        id: subCategoryId,
+      });
+      return result.affected;
     }
-
-    const result = await this.subCategoryRepository.softDelete({
-      id: subCategoryId,
-    });
-    return result.affected;
   }
 
   async restore({ subCategoryId }) {

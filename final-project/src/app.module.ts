@@ -8,6 +8,8 @@ import { UsersModule } from './apis/users/users.module';
 import { ImagesModule } from './apis/images/images.module';
 import { SubCategoriesModule } from './apis/subCategories/subCategories.module';
 import { MainCategoriesModule } from './apis/mainCategories/mainCategories.module';
+import { NutriesModule } from './apis/nutries/nutries.module';
+import { OrdersModule } from './apis/orders/orders.module';
 
 @Module({
   imports: [
@@ -16,6 +18,8 @@ import { MainCategoriesModule } from './apis/mainCategories/mainCategories.modul
     ImagesModule,
     SubCategoriesModule,
     MainCategoriesModule,
+    NutriesModule,
+    OrdersModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/commons/graphql/schema.gql',

@@ -34,4 +34,14 @@ export class UsersResolver {
   ) {
     return this.usersService.update({ userId, updateUserInput });
   }
+
+  @Mutation(() => Boolean)
+  deleteUser(@Args('userId') userId: string) {
+    return this.usersService.delete({ userId });
+  }
+
+  @Mutation(() => Boolean)
+  restoreUser(@Args('userId') userId: string) {
+    return this.usersService.restore({ userId });
+  }
 }

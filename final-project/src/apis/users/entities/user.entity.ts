@@ -3,6 +3,7 @@ import { Coupon } from 'src/apis/coupons/entities/coupon.entity';
 import { UserGrade } from 'src/apis/usersGrades/entities/userGrade.entity';
 import {
   Column,
+  DeleteDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
@@ -24,7 +25,6 @@ export class User {
   name: string;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
-  @Field(() => String)
   pwd: string;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
@@ -34,6 +34,9 @@ export class User {
   @Column({ type: 'varchar', length: 100, nullable: true })
   @Field(() => String)
   email: string;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 
   @ManyToOne(() => UserGrade)
   @Field(() => UserGrade)
