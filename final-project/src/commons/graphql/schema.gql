@@ -46,7 +46,7 @@ type MainCategory {
 type SubCategory {
   id: String!
   name: String!
-  mainId: MainCategory!
+  mainCategory: MainCategory!
 }
 
 type Food {
@@ -81,6 +81,8 @@ type Query {
   fetchImages: [Image!]!
   fetchImagesWithDeleted: [Image!]!
   fetchSubCategories: [SubCategory!]!
+  fetchMainCategories: [MainCategory!]!
+  fetchMainCategoriesWithDeleted: [MainCategory!]!
 }
 
 type Mutation {
@@ -94,6 +96,13 @@ type Mutation {
   updateImage(imageId: String!, updateImageInput: UpdateImageInput!): Image!
   deleteImage(imageId: String!): Boolean!
   createSubCategory(createSubCategory: CreateSubCategory!): SubCategory!
+  updateSubCategory(subCategoryId: String!, updateSubCategory: UpdateSubCategory!): SubCategory!
+  deleteSubCategory(subCategoryId: String!): Boolean!
+  restoreSubCategory(subCategoryId: String!): Boolean!
+  createMainCategory(createMainCategoryInput: CreateMainCategoryInput!): MainCategory!
+  updateMainCategory(mainCategoryId: String!, updateMainCategoryInput: UpdateMainCategoryInput!): MainCategory!
+  deleteMainCategory(mainCategoryId: String!): Boolean!
+  restoreMainCategory(mainCategoryId: String!): Boolean!
 }
 
 input CreateFoodInput {
@@ -140,4 +149,18 @@ input UpdateImageInput {
 
 input CreateSubCategory {
   name: String!
+  mainCategoryId: String!
+}
+
+input UpdateSubCategory {
+  name: String
+  mainCategoryId: String
+}
+
+input CreateMainCategoryInput {
+  name: String!
+}
+
+input UpdateMainCategoryInput {
+  name: String
 }

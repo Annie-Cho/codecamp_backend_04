@@ -7,6 +7,7 @@ import 'dotenv/config';
 import { UsersModule } from './apis/users/users.module';
 import { ImagesModule } from './apis/images/images.module';
 import { SubCategoriesModule } from './apis/subCategories/subCategories.module';
+import { MainCategoriesModule } from './apis/mainCategories/mainCategories.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { SubCategoriesModule } from './apis/subCategories/subCategories.module';
     UsersModule,
     ImagesModule,
     SubCategoriesModule,
+    MainCategoriesModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/commons/graphql/schema.gql',

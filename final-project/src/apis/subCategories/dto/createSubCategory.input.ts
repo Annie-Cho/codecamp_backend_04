@@ -4,4 +4,7 @@ import { Field, InputType } from '@nestjs/graphql';
 export class CreateSubCategory {
   @Field(() => String)
   name: string;
+
+  @Field(() => String)
+  mainCategoryId: string;
 }
